@@ -1,24 +1,21 @@
-import { SafeAreaView, StyleSheet,} from "react-native";
+import { SafeAreaView, StyleSheet, Text, View,} from "react-native";
 
 import colors from "./assets/config/colors";
 import Constants from "expo-constants";
 import LoginScreen from "./assets/screens/LoginScreen";
 
-
 export default function App() {
-
   return (
-    <SafeAreaView style={styles.main}>
-    <LoginScreen />
+    <SafeAreaView style={styles.container}>
+      <LoginScreen />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    // justifyContent : "flex-start",
-    backgroundColor: colors.light,
-    paddingTop : Constants.statusBarHeight
-  },
-});
+  container:{
+    backgroundColor : '#fef6f6',
+    flex : 1,
+    paddingTop:Constants.statusBarHeight,
+  }
+})

@@ -28,6 +28,7 @@
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "description": "A marketplace for things you dont need anymore!"
+    "description": "A marketplace for things you dont need anymore!",
+    "githubUrl": "https://github.com/muathime/doneWithIt-react-native-app"
   }
 }
