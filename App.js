@@ -1,13 +1,12 @@
 import { SafeAreaView, StyleSheet, Text, View,} from "react-native";
 
-import colors from "./assets/config/colors";
 import Constants from "expo-constants";
-import LoginScreen from "./assets/screens/LoginScreen";
+import { AddProductScreen } from "./assets/screens";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <LoginScreen />
+      <AddProductScreen />
     </SafeAreaView>
   );
 }

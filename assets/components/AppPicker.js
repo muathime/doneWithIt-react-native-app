@@ -31,11 +31,11 @@ function AppPicker({ icon, labels, onSelect, placeholder, selected, }) {
       </TouchableWithoutFeedback>
       <View style={styles.modal}>
         <Modal visible={visibility} animationType={"slide"}>
-          <Button
+          {/* <Button
             title={"Close"}
             onPress={() => setVisibility(false)}
             style={styles.closeButtton}
-          />
+          /> */}
 
           <FlatList
             data={labels}
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    color : colors.medium
   },
 });
 export default AppPicker;

@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.white,
     marginBottom: 25,
+    marginTop : 40
   },
   mid: {
     backgroundColor: colors.white,

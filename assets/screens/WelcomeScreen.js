@@ -5,7 +5,7 @@ import AppButton from '../components/AppButton';
 function WelcomeScreen() {
     return (
       <ImageBackground
-      blurRadius={3}
+        blurRadius={3}
         style={styles.background}
         source={require("../images/background.jpg")}
       >
@@ -15,21 +15,11 @@ function WelcomeScreen() {
             source={require("../images/logo-red.png")}
           />
           <Text style={styles.headerText}>Sell What You Don't Need</Text>
-          
         </View>
 
         <View style={styles.buttonsContainer}>
-          <AppButton
-            title="Login"
-            onPress={() => console.log("Login")}
-            btnCcolor="primary"
-          />
-
-          <AppButton
-            title="Register"
-            onPress={() => console.log("Register")}
-            btnCcolor="secondary"
-          />
+          <AppButton btnColor="primary" title="Login" />
+          <AppButton btnColor="danger" title="Register" />
         </View>
       </ImageBackground>
     );
