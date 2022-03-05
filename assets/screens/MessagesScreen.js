@@ -5,19 +5,21 @@ import ListSeperator from '../components/ListSeperator';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
 
 const initialMessages = [
-    {
-        id : 1,
-        title : '1st Message title goes here',
-        description : '1st Description goes here',
-        avatar : require("../images/antony.jpg")
-    },
-    {
-        id : 2,
-        title : '2nd Message title goes here',
-        description : '2nd Description goes here',
-        avatar : require("../images/antony.jpg")
-    }
-]
+  {
+    id: 1,
+    title: "Antony Munyao",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    avatar: require("../images/antony.jpg"),
+  },
+  {
+    id: 2,
+    title: "Antony Muathime",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    avatar: require("../images/antony.jpg"),
+  },
+];
 function MessagesScreen() {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);

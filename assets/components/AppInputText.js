@@ -6,7 +6,7 @@ function AppInputText({icon, ...moreProps}) {
     return (
       <View style={styles.container}>
         {icon && <MaterialCommunityIcons style={styles.icon} name={icon} size={25} color={colors.black} />}
-        <TextInput style={styles.input} {...moreProps} />
+        <TextInput style={styles.input} {...moreProps}/>
       </View>
     );
 }

@@ -5,13 +5,17 @@ import AppInputText from '../components/AppInputText';
 import { Formik, yupToFormErrors } from 'formik';
 import * as yup from 'yup';
 import ErrorMessages from '../components/ErrorMessages';
-import AppPicker from '../components/AppPicker';
+import AppCategoryPicker from '../components/AppCategoryPicker';
 
 const categories = [
-  { value: 1, label: "Furniture" },
-  { value: 2, label: "Clothing" },
-  { value: 3, label: "Cameras" },
-  { value: 4, label: "Cars" },
+  { value: 1, label: "Furniture", icon: "seat", bgcolor: "primary" },
+  { value: 2, label: "Clothing", icon: "lingerie", bgcolor: "secondary" },
+  { value: 3, label: "Cameras", icon: "camera", bgcolor: "black" },
+  { value: 4, label: "Cars", icon: "car", bgcolor: "warning" },
+  { value: 5, label: "Electronics", icon: "television", bgcolor: "primary" },
+  { value: 6, label: "Farm", icon: "tractor", bgcolor: "secondary" },
+  { value: 7, label: "Tools", icon: "wrench", bgcolor: "black" },
+  { value: 8, label: "Food", icon: "ice-cream", bgcolor: "warning" },
 ];
 
 const validationSchema = yup.object().shape({
@@ -29,7 +33,7 @@ function AddProductScreen() {
         source={require("../images/background.jpg")}
       >
         <Formik
-          initialValues={{ title: "", price: "", description: "" }}
+          initialValues={{ title: "", price: "", description: "", category:"" }}
           onSubmit={(values) => console.log(values)}
           validationSchema={validationSchema}
         >
@@ -58,15 +62,17 @@ function AddProductScreen() {
                 onBlur={() => setFieldTouched("price")}
                 onChangeText={handleChange("price")}
                 placeholder={"Price"}
+                keyboardType={'numeric'}
               />
               <ErrorMessages error={errors.price} visible={touched.price} />
 
-              <AppPicker
+              <AppCategoryPicker
                 selected={category}
                 onSelect={(item) => setCategory(item)}
                 placeholder={"Categories"}
                 icon={"apps"}
                 labels={categories}
+                onChangeText={handleChange("category")}
               />
 
               <AppInputText
