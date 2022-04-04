@@ -6,6 +6,7 @@ import { Formik, yupToFormErrors } from 'formik';
 import * as yup from 'yup';
 import ErrorMessages from '../components/ErrorMessages';
 import AppCategoryPicker from '../components/AppCategoryPicker';
+import AppImageInput from "../components/AppImageInput";
 
 const categories = [
   { value: 1, label: "Furniture", icon: "seat", bgcolor: "primary" },
@@ -19,9 +20,10 @@ const categories = [
 ];
 
 const validationSchema = yup.object().shape({
-title : yup.string().required().label('Title'),
-price : yup.number().required().positive().label('Price'),
-description: yup.string().required().label('Description')
+  title: yup.string().required().label("Title"),
+  price: yup.number().required().positive().label("Price"),
+  description: yup.string().required().label("Description"),
+  imageUrl: yup.string().required().label("Product Image")
 });
 
 function AddProductScreen() {
@@ -33,7 +35,12 @@ function AddProductScreen() {
         source={require("../images/background.jpg")}
       >
         <Formik
-          initialValues={{ title: "", price: "", description: "", category:"" }}
+          initialValues={{
+            title: "",
+            price: "",
+            description: "",
+            category: "",
+          }}
           onSubmit={(values) => console.log(values)}
           validationSchema={validationSchema}
         >
@@ -45,6 +52,9 @@ function AddProductScreen() {
             touched,
           }) => (
             <>
+              <AppImageInput/>
+              <ErrorMessages error={errors.imageUrl} visible={touched.imageUrl} />
+
               <AppInputText
                 autoCapitalize={"none"}
                 autoCorrect={true}
@@ -62,7 +72,7 @@ function AddProductScreen() {
                 onBlur={() => setFieldTouched("price")}
                 onChangeText={handleChange("price")}
                 placeholder={"Price"}
-                keyboardType={'numeric'}
+                keyboardType={"numeric"}
               />
               <ErrorMessages error={errors.price} visible={touched.price} />
 

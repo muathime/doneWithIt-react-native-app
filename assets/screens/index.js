@@ -7,3 +7,4 @@ export { default as MessagesScreen } from "./MessagesScreen";
 export { default as ProductImageScreen } from "./ProductImageScreen";
 export { default as WelcomeScreen } from "./WelcomeScreen";
 export { default as AddProductScreen } from "./AddProductScreen";
+export { default as SelectImages } from "./SelectImages";
