@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Image, TouchableOpacity, FlatList, TextInput } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity, FlatList, Alert } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from '../config/colors';
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 
-const selectedImages = [];
 var id = 0;
 
 function AppImageInput({onBlur, onChangeText}) {
+const [selectedImages, setSelectedImages] = useState([]);
+
 useEffect(()=>{
     permission();
 }, []);
@@ -31,21 +32,37 @@ const selectImage = async()=>{
     }
 }
 
+const handleDelete = (message) => {
+  Alert.alert("Confirm", "Remove this Image?", [
+    {
+      text: "No",
+      style: "cancel",
+    },
+    {
+      text: "Yes",
+      onPress: () => {
+        setSelectedImages(selectedImages.filter((m) => m.id !== message.id));
+      },
+    },
+  ]);
+};
+
 const [imageUri, setImageUri] = useState();
    return (
      <View style={styles.container}>
-
        {imageUri && (
          <FlatList
            data={selectedImages}
            keyExtractor={(data) => data.id.toString()}
            numColumns={3}
-           renderItem={({item}) => (
-             <Image
-               source={{uri: item.image}}
-               resizeMode={"cover"}
-               style={styles.image}
-             />
+           renderItem={({ item }) => (
+             <TouchableOpacity onPress={() => handleDelete(item)}>
+               <Image
+                 source={{ uri: item.image }}
+                 resizeMode={"cover"}
+                 style={styles.image}
+               />
+             </TouchableOpacity>
            )}
          />
        )}
