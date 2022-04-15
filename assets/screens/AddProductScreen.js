@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import ErrorMessages from '../components/ErrorMessages';
 import AppCategoryPicker from '../components/AppCategoryPicker';
 import AppImageInput from "../components/AppImageInput";
+import useLocation from './CustomHooks/useLocation';
 
 const categories = [
   { value: 1, label: "Furniture", icon: "seat", bgcolor: "primary" },
@@ -27,6 +28,8 @@ const validationSchema = yup.object().shape({
 });
 
 function AddProductScreen() {
+  const location = useLocation();
+
   const [category, setCategory] = useState(categories[3].label);
     return (
       <ImageBackground
@@ -42,7 +45,7 @@ function AddProductScreen() {
             description: "",
             category: "",
           }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => console.log(location)}
           validationSchema={validationSchema}
         >
           {({
@@ -51,14 +54,15 @@ function AddProductScreen() {
             errors,
             setFieldTouched,
             touched,
-            setFieldValue
+            setFieldValue,
           }) => (
             <>
-              <AppImageInput 
-                name = "imageUrl"
-                onImageSelect={(imageArray) => {setFieldValue("imageUrl", imageArray);}}
-
-                />
+              <AppImageInput
+                name="imageUrl"
+                onImageSelect={(imageArray) => {
+                  setFieldValue("imageUrl", imageArray);
+                }}
+              />
               <ErrorMessages error={errors.imageUrl} visible={true} />
 
               <AppInputText
@@ -84,7 +88,9 @@ function AddProductScreen() {
 
               <AppCategoryPicker
                 selected={category}
-                onSelect={(item) => {setCategory(item), setFieldValue("category", item);}}
+                onSelect={(item) => {
+                  setCategory(item), setFieldValue("category", item);
+                }}
                 placeholder={"Categories"}
                 icon={"apps"}
                 labels={categories}
