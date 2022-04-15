@@ -44,8 +44,9 @@ function AddProductScreen() {
             price: "",
             description: "",
             category: "",
+            userLoc: [],
           }}
-          onSubmit={(values) => console.log(location)}
+          onSubmit={(values) => console.log(values)}
           validationSchema={validationSchema}
         >
           {({
@@ -60,7 +61,7 @@ function AddProductScreen() {
               <AppImageInput
                 name="imageUrl"
                 onImageSelect={(imageArray) => {
-                  setFieldValue("imageUrl", imageArray);
+                  setFieldValue("imageUrl", imageArray)
                 }}
               />
               <ErrorMessages error={errors.imageUrl} visible={true} />
@@ -69,7 +70,7 @@ function AddProductScreen() {
                 autoCapitalize={"none"}
                 autoCorrect={true}
                 autoComplete={"none"}
-                onBlur={() => setFieldTouched("title")}
+                onBlur={() => {setFieldTouched("title"), setFieldValue("userLoc", location)}}
                 onChangeText={handleChange("title")}
                 placeholder={"Title"}
               />
