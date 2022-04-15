@@ -23,7 +23,7 @@ const validationSchema = yup.object().shape({
   title: yup.string().required().label("Title"),
   price: yup.number().required().positive().label("Price"),
   description: yup.string().required().label("Description"),
-  imageUrl: yup.string().required().label("Product Image")
+  imageUrl: yup.array().min(1, "Select at least 1 image!")
 });
 
 function AddProductScreen() {
@@ -36,6 +36,7 @@ function AddProductScreen() {
       >
         <Formik
           initialValues={{
+            imageUrl: [],
             title: "",
             price: "",
             description: "",
@@ -50,10 +51,15 @@ function AddProductScreen() {
             errors,
             setFieldTouched,
             touched,
+            setFieldValue
           }) => (
             <>
-              <AppImageInput/>
-              <ErrorMessages error={errors.imageUrl} visible={touched.imageUrl} />
+              <AppImageInput 
+                name = "imageUrl"
+                onImageSelect={(imageArray) => {setFieldValue("imageUrl", imageArray);}}
+
+                />
+              <ErrorMessages error={errors.imageUrl} visible={true} />
 
               <AppInputText
                 autoCapitalize={"none"}
@@ -78,7 +84,7 @@ function AddProductScreen() {
 
               <AppCategoryPicker
                 selected={category}
-                onSelect={(item) => setCategory(item)}
+                onSelect={(item) => {setCategory(item), setFieldValue("category", item);}}
                 placeholder={"Categories"}
                 icon={"apps"}
                 labels={categories}

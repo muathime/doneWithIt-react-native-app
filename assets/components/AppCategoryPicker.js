@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import PickerItems from "./PickerItems"
 
-function AppCategoryPicker({ icon, labels, onSelect, placeholder, selected, }) {
+function AppCategoryPicker({ icon, labels, onSelect, placeholder, selected}) {
   const [visibility, setVisibility] = useState(false);
 
   return (
