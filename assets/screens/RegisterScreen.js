@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React from 'react';
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import AppButton from '../components/AppButton';
 import AppInputText from '../components/AppInputText';
 import * as yup from 'yup';
@@ -20,6 +20,9 @@ function RegisterScreen() {
         style={styles.background}
         source={require("../images/background.jpg")}
       >
+        <View style={{ marginBottom: 35 }} /> 
+        {/* to get top space */}
+
         <Formik
           initialValues={{ username: "", email: "", password: "" }}
           onSubmit={(values) => console.log(values)}
