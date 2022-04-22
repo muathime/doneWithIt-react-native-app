@@ -39,6 +39,10 @@ const register = () =>(
   <RegisterScreen />
 );
 
+const listing = () => <ListingScreen />;
+const account = () => <AccountScreen />;
+const add = () => <AddProductScreen />;
+
 const Stack = createStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -52,24 +56,15 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => (
   <Tab.Navigator
     tabBarOptions={{
-      activeBackgroundColor: colors.danger,
-      activeTintColor: colors.white,
-      inactiveBackgroundColor: "#eee",
-      inactiveTintColor: colors.black,
+      // activeBackgroundColor: colors.danger,
+      activeTintColor: colors.danger,
+      // inactiveBackgroundColor: "#eee",
+      inactiveTintColor: colors.medium,
     }}
   >
     <Tab.Screen
-      name="Login"
-      component={login}
-      options={{
-        tabBarIcon: ({ size, color }) => (
-          <MaterialCommunityIcons name={"login"} size={size} color={color} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="Welcome"
-      component={welcome}
+      name="Feed"
+      component={listing}
       options={{
         tabBarIcon: ({ size, color }) => (
           <MaterialCommunityIcons name={"home"} size={size} color={color} />
@@ -78,11 +73,27 @@ const TabNavigator = () => (
     />
 
     <Tab.Screen
-      name="Register"
-      component={register}
+      name=" "
+      component={add}
       options={{
         tabBarIcon: ({ size, color }) => (
-          <MaterialCommunityIcons name={"pen-plus"} size={size} color={color} />
+          <View style={{backgroundColor:colors.white, height:60, width:60, alignItems:'center', justifyContent:'center', borderRadius:30}}>
+          <View style={{backgroundColor:colors.danger, height:50, width:50, alignItems:'center', justifyContent:'center', borderRadius:25}}>
+            <View style={{backgroundColor:colors.white, height:25, width:25, alignItems:'center', justifyContent:'center', borderRadius:12.5}}>
+              <MaterialCommunityIcons name={"plus"} size={size} color={color} />
+            </View>
+          </View>
+          </View>
+        ),
+      }}
+    />
+
+    <Tab.Screen
+      name="Account"
+      component={account}
+      options={{
+        tabBarIcon: ({ size, color }) => (
+          <MaterialCommunityIcons name={"account"} size={size} color={color} />
         ),
       }}
     />
@@ -96,6 +107,7 @@ export default function App() {
         {/* <StackNavigator /> */}
         <TabNavigator />
       </NavigationContainer>
+
     </SafeAreaView>
   );
 }
