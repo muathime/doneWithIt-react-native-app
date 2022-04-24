@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, TouchableWithoutFeedback } from "react-native";
 import colors from '../config/colors';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function Card({title, subtitle, picture}) {
+function Card({title, subtitle, picture, onPress}) {
   return (
+    <TouchableWithoutFeedback onPress={onPress}>
     <View style={styles.card}>
       <Image source={picture} style={styles.pictureStye} />
       <View style={styles.cardDetails}>
@@ -18,6 +19,7 @@ function Card({title, subtitle, picture}) {
         </Text>
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 

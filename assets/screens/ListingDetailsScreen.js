@@ -3,13 +3,15 @@ import { View, Image, StyleSheet, Text } from "react-native";
 import colors from '../config/colors';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function ListingDetailsScreen({ title, subtitle, picture }) {
+function ListingDetailsScreen({ route }) {
+  const listing = route.params;
+
   return (
     <View style={styles.card}>
-      <Image source={picture} style={styles.pictureStye} />
+      <Image source={listing.image} style={styles.pictureStye} />
       <View style={styles.cardDetails}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{subtitle} </Text>
+        <Text style={styles.title}>{listing.title}</Text>
+        <Text style={styles.subtitle}>{listing.price}</Text>
         <Text>
           <MaterialCommunityIcons name="star" color="gold" />
           <MaterialCommunityIcons name="star" color="gold" />

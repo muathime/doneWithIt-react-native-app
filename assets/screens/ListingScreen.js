@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FlatList } from 'react-native';
 import Card from '../components/Card'
+
 const initialListings = [
   {
     id: 1,
@@ -15,7 +16,7 @@ const initialListings = [
     image: require("../images/couch.jpg"),
   },
 ];
-function ListingScreen(props) {
+function ListingScreen({navigation}) {
   const [refreshing, setRefreshing] = useState(false);
   const [listings, setListings] = useState(initialListings);
 
@@ -28,6 +29,7 @@ function ListingScreen(props) {
           title={item.title}
           subtitle={"Kshs." + item.price}
           picture={item.image}
+          onPress={() => navigation.navigate("ListingDetails", item)}
         />
       )}
       refreshing={refreshing}

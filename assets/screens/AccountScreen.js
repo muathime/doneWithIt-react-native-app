@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import IconList from '../components/IconList';
 import ListItem from '../components/ListItem';
 import colors from '../config/colors';
 
-function AccountScreen(props) {
+function AccountScreen({navigation}) {
     return (
       <View>
         <View style={styles.header}>
@@ -16,12 +16,14 @@ function AccountScreen(props) {
         </View>
 
         <View style={styles.mid}>
-          <IconList iconName={"menu"} color={'danger'} title={"My Listings"} />
-          <IconList iconName={"mail"} color={'primary'} title={"My Account"} />
+          <IconList iconName={"menu"} color={"danger"} title={"My Listings"} />
+          <IconList iconName={"mail"} color={"primary"} title={"My Account"} />
         </View>
 
         <View style={styles.footer}>
-          <IconList iconName={"logout"} color={'warning'} title={"Log out"} />
+          <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
+            <IconList iconName={"logout"} color={"warning"} title={"Log out"} />
+          </TouchableOpacity>
         </View>
       </View>
     );

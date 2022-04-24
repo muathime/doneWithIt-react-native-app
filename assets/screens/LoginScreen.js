@@ -10,7 +10,7 @@ email : yup.string().required().email().label("Email"),
 password : yup.string().required().min(4).label("Password")
 });
 
-function LoginScreen({onLogin}) {
+function LoginScreen({navigation}) {
     return (
       <ImageBackground
         blurRadius={3}
@@ -21,7 +21,7 @@ function LoginScreen({onLogin}) {
         <Formik
           initialValues={{ email: "", password: "" }}
           // onSubmit={(values) => console.log(values)}
-          onSubmit={onLogin}
+          onSubmit={() => navigation.navigate("Home")}
           validationSchema={validationSchema}
         >
           {({
