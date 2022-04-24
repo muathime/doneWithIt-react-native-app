@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
   container:{
     backgroundColor : 'transparent',
     flex : 1,
-    // paddingTop:Constants.statusBarHeight,
+    paddingTop:Constants.statusBarHeight,
   },
 })
