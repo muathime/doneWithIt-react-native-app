@@ -5,6 +5,7 @@ import listingsApi from "../api/listingsApi";
 import AppButton from "../components/AppButton";
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import colors from "../config/colors";
+import Loader from "../components/Loader";
 // const initialListings = [
 //   {
 //     id: 1,
@@ -24,12 +25,16 @@ function ListingScreen({navigation}) {
   const [error, setError] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     loadListings();
   }, []);
 
   const loadListings = async() => {
+    setLoading(true);
     const response = await listingsApi.getListings();
+    setLoading(false);
+    
     if(!response.ok) return setError(true);
     setListings(response.data);
     setError(false);
@@ -38,13 +43,20 @@ function ListingScreen({navigation}) {
   }
 
   return (
-    <View>
+    <>
       {error && (
         <>
-          <MaterialCommunityIcons name="server-network-off" size={65} color={colors.medium} style={{alignSelf:'center', padding:30}}/>
-          <AppButton title="Retry" onPress={loadListings} btnColor={'danger'}/>
+          <MaterialCommunityIcons
+            name="server-network-off"
+            size={65}
+            color={colors.medium}
+            style={{ alignSelf: "center", padding: 30 }}
+          />
+          <AppButton title="Retry" onPress={loadListings} btnColor={"danger"} />
         </>
       )}
+      <Loader visible={loading} />
+
       <FlatList
         data={listings}
         keyExtractor={(data) => data.id.toString()}
@@ -89,7 +101,7 @@ function ListingScreen({navigation}) {
           ]);
         }}
       />
-    </View>
+    </>
   );
 }
 
