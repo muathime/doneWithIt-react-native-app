@@ -17,7 +17,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <NavigationContainer>
-        <AuthNavigator />
+        <AuthNavigator /> 
       </NavigationContainer>
 
     </SafeAreaView>

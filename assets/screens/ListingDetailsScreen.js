@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import { View, Image, StyleSheet, Text } from "react-native";
-import colors from '../config/colors';
+import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function ListingDetailsScreen({ route }) {
@@ -8,7 +8,10 @@ function ListingDetailsScreen({ route }) {
 
   return (
     <View style={styles.card}>
-      <Image source={listing.image} style={styles.pictureStye} />
+      <Image
+        source={{ uri: listing.images[0].url }}
+        style={styles.pictureStye}
+      />
       <View style={styles.cardDetails}>
         <Text style={styles.title}>{listing.title}</Text>
         <Text style={styles.subtitle}>{listing.price}</Text>
