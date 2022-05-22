@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet } from "react-native";
+import {ImageBackground, StyleSheet } from "react-native";
 import AppButton from '../components/AppButton';
 import AppInputText from '../components/AppInputText';
 import { Formik, yupToFormErrors } from 'formik';
@@ -8,6 +8,7 @@ import ErrorMessages from '../components/ErrorMessages';
 import AppCategoryPicker from '../components/AppCategoryPicker';
 import AppImageInput from "../components/AppImageInput";
 import useLocation from './CustomHooks/useLocation';
+import listingsApi from '../api/listingsApi';
 
 const categories = [
   { value: 1, label: "Furniture", icon: "seat", bgcolor: "primary" },
@@ -31,6 +32,13 @@ function AddProductScreen() {
   const location = useLocation();
 
   const [category, setCategory] = useState(categories[3].label);
+
+  const handleSubmit = async (listing) =>{
+    // listing.location = location;
+    const response = await listingsApi.postListings(listing);
+    if(!response.ok) return alert(response.problem);
+    alert('Success!')
+  }
     return (
       <ImageBackground
         blurRadius={3}
@@ -46,7 +54,8 @@ function AddProductScreen() {
             category: "",
             userLoc: [],
           }}
-          onSubmit={(values) => console.log(values)}
+          // onSubmit={(values) => console.log(values)}
+          onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
           {({
@@ -61,7 +70,7 @@ function AddProductScreen() {
               <AppImageInput
                 name="imageUrl"
                 onImageSelect={(imageArray) => {
-                  setFieldValue("imageUrl", imageArray)
+                  setFieldValue("imageUrl", imageArray);
                 }}
               />
               <ErrorMessages error={errors.imageUrl} visible={true} />
@@ -70,7 +79,9 @@ function AddProductScreen() {
                 autoCapitalize={"none"}
                 autoCorrect={true}
                 autoComplete={"none"}
-                onBlur={() => {setFieldTouched("title"), setFieldValue("userLoc", location)}}
+                onBlur={() => {
+                  setFieldTouched("title"), setFieldValue("userLoc", location);
+                }}
                 onChangeText={handleChange("title")}
                 placeholder={"Title"}
               />

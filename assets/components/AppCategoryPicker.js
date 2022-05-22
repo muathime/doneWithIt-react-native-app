@@ -46,7 +46,7 @@ function AppCategoryPicker({ icon, labels, onSelect, placeholder, selected}) {
                 label={item.label}
                 onPress={() => {
                   setVisibility(false);
-                  onSelect(item.label);
+                  onSelect(item.value);
                 }}
               />
             )}
