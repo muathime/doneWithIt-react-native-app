@@ -2,7 +2,7 @@ import apiClient from './client';
 
 const getListings = () => apiClient.get('/listings')
 
-const postListings = listing => {
+const postListings = (listing, onUploadProgress) => {
   const data = new FormData();
   data.append("title", listing.title);
   data.append("price", listing.price);
@@ -30,7 +30,8 @@ const postListings = listing => {
 
   // return console.log(data);
 
-  return apiClient.post("/listings", data);
+  // return apiClient.post("/listings", data, { onUploadProgress : progress => console.log(progress)});
+  return apiClient.post("/listings", data, { onUploadProgress : progress => onUploadProgress(progress.loaded/progress.total)});
 }
 
 export default {

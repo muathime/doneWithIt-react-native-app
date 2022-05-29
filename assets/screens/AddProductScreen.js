@@ -9,6 +9,7 @@ import AppCategoryPicker from '../components/AppCategoryPicker';
 import AppImageInput from "../components/AppImageInput";
 import useLocation from './CustomHooks/useLocation';
 import listingsApi from '../api/listingsApi';
+import UploadScreen from './UploadScreen';
 
 const categories = [
   { value: 1, label: "Furniture", icon: "seat", bgcolor: "primary" },
@@ -29,15 +30,26 @@ const validationSchema = yup.object().shape({
 });
 
 function AddProductScreen() {
+  const [loadingVisibility, setLoadingVisibility] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+
   const location = useLocation();
 
   const [category, setCategory] = useState(categories[3].label);
 
   const handleSubmit = async (listing) =>{
     // listing.location = location;
-    const response = await listingsApi.postListings(listing);
-    if(!response.ok) return alert(response.problem);
-    alert('Success!')
+    // const response = await listingsApi.postListings(listing, (progress) => console.log(progress));/
+    setUploadProgress(0); //reset upload!
+    setLoadingVisibility(true);
+    const response = await listingsApi.postListings(listing, (progress) => setUploadProgress(progress));
+    
+    if(!response.ok) 
+    {
+      setLoadingVisibility(false);
+      return alert(response.problem);
+    }
+    // alert('Success!')
   }
     return (
       <ImageBackground
@@ -45,6 +57,7 @@ function AddProductScreen() {
         style={styles.background}
         source={require("../images/background.jpg")}
       >
+        <UploadScreen visibility={loadingVisibility} progress={uploadProgress} onDone={()=> setLoadingVisibility(false)}/>
         <Formik
           initialValues={{
             imageUrl: [],
