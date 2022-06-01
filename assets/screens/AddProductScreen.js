@@ -37,7 +37,7 @@ function AddProductScreen() {
 
   const [category, setCategory] = useState(categories[3].label);
 
-  const handleSubmit = async (listing) =>{
+  const handleSubmit = async (listing, { resetForm }) =>{
     // listing.location = location;
     // const response = await listingsApi.postListings(listing, (progress) => console.log(progress));/
     setUploadProgress(0); //reset upload!
@@ -50,6 +50,7 @@ function AddProductScreen() {
       return alert(response.problem);
     }
     // alert('Success!')
+    resetForm();
   }
     return (
       <ImageBackground
@@ -78,6 +79,7 @@ function AddProductScreen() {
             setFieldTouched,
             touched,
             setFieldValue,
+            values
           }) => (
             <>
               <AppImageInput
@@ -85,6 +87,7 @@ function AddProductScreen() {
                 onImageSelect={(imageArray) => {
                   setFieldValue("imageUrl", imageArray);
                 }}
+                value = {values.imageUrl}
               />
               <ErrorMessages error={errors.imageUrl} visible={true} />
 
@@ -97,6 +100,7 @@ function AddProductScreen() {
                 }}
                 onChangeText={handleChange("title")}
                 placeholder={"Title"}
+                value = {values.title}
               />
               <ErrorMessages error={errors.title} visible={touched.title} />
 
@@ -108,6 +112,7 @@ function AddProductScreen() {
                 onChangeText={handleChange("price")}
                 placeholder={"Price"}
                 keyboardType={"numeric"}
+                value = {values.price}
               />
               <ErrorMessages error={errors.price} visible={touched.price} />
 
@@ -120,6 +125,7 @@ function AddProductScreen() {
                 icon={"apps"}
                 labels={categories}
                 onChangeText={handleChange("category")}
+                value= {values.category}
               />
 
               <AppInputText
@@ -131,6 +137,7 @@ function AddProductScreen() {
                 onBlur={() => setFieldTouched("description")}
                 onChangeText={handleChange("description")}
                 placeholder={"Description"}
+                value = {values.description}
               />
               <ErrorMessages
                 error={errors.description}
